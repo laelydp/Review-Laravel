@@ -1,23 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Post</title>
-</head>
-<body>
-  <h1>Halaman Index Post</h1>  
+@extends('template.dashboard')
 
-  <table>
-    <thead>
-      <tr>
-        <td>NO</td>
-        <td>title</td>
-        <td>body</td>
-        <td>action</td>
-      </tr>
-    </thead>
+@section('content')
+<div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Data Post</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+      <table id="data-table" class="table table-bordered table-hover">
+        <thead>
+        <tr>
+          <th>NO</th>
+          <th>Title</th>
+          <th>Body</th>
+          <th>Action</th>
+        </tr>
+        </thead>
     <tbody>
       <tr>
         @forelse ($datapost as $item=>$value)
@@ -26,22 +24,25 @@
           <td>{{ $value->title }}</td>
           <td>{{ $value->body }}</td>
           <td>
-            <form action="/post/{{ $value->id }}" method="POST">
+            <!-- <form action="/post/{{ $value->id }}" method="POST">
             <a href="/post/{{ $value->id }}">detail</a>
-            <a href="/post/{{ $value->id }}/edit">edit</a>
+            <a href="/post/{{ $value->id }}/edit">edit</a> -->
+            <form action ="/post/{{ $value->id }}" method="POST">
+              <a class="btn btn-sm btn-info mr-3" href="/post/{{ $value->id }}">Detail</a>
+              <a class="btn  btn-sm btn-warning mr-3" href= "/post/{{ $value->id }}/edit">Edit</a>
             @csrf
             @method('DELETE')
-            <input type="submit" value="Delete">
+            <input type="submit" class="btn btn-sm btn-danger mr-3" value="Delete">
             </form>
-          </td>
+            </td>
           </tr>   
-        @empty
-            <tr>
-              <td>data masih kosong</td>
-            </tr>
-        @endforelse
-      </tr>
+          @empty       
+        <tr>
+            <td>Data Masih Kosong</td>
+        </tr>
+      @endforelse
     </tbody>
   </table>
+  @endsection
 </body>
 </html>

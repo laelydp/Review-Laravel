@@ -37,11 +37,11 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
+            'telepon' => 'required',
             'alamat' => 'required'
         ]);
         Profile::create([
-            'nama' => $request->nama,
+            'telepon' => $request->telepon,
             'alamat' => $request->alamat
         ]);
         return redirect('/profile');
@@ -81,12 +81,12 @@ class ProfileController extends Controller
     public function update(Request $request, Profile $profile)
     {
         $request->validate([
-            'nama' => 'required',
+            'telepon' => 'required',
             'alamat' => 'required'
         ]);
 
         $profile = Profile::find($profile->id);
-        $profile->nama     = $request->nama;
+        $profile->telepon     = $request->telepon;
         $profile->alamat   = $request->alamat;
         $profile->update();
 
